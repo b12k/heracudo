@@ -179,12 +179,6 @@
   "eslintIgnore": [
     "dist/**/*"
   ],
-  "husky": {
-    "hooks": {
-      "post-merge": "npm i",
-      "pre-push": "npm run lint"
-    }
-  },
   "release-it": {
     "npm": {
       "publish": false
