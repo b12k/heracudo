@@ -55,7 +55,7 @@
     }
   },
   "lint-staged": {
-    "*.{js}": "lint"
+    "*.{js}": "npm run lint"
   },
   "release-it": {
     "npm": {
