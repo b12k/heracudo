@@ -42,7 +42,7 @@ const deletePrLink = async () => {
   return setPrBody(newPrBody);
 };
 
-const banana;
+const banana = 'fruit';
 
 module.exports = {
   createPrLink,
