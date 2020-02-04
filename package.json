@@ -2,7 +2,7 @@
   "name": "heracudo",
   "version": "1.0.0",
   "description": "Heracudo - Heroku Review Apps Custom Domain",
-  "main": "./dist",
+  "main": "bin/index.js",
   "keywords": [
     "Heroku",
     "Review Apps",
@@ -12,15 +12,15 @@
   "author": "Bogdan Kolesnyk",
   "license": "MIT",
   "scripts": {
-    "build": "babel src --out-dir dist --copy-files",
-    "dev": "babel src --out-dir dist --copy-files -w",
+    "build": "babel src --out-dir bin --copy-files",
+    "dev": "babel src --out-dir bin --copy-files -w",
     "prepare": "shx cp -n .env.example .env",
-    "test:postdeploy": "env-cmd node dist/postDeploy.js",
-    "test:predestroy": "env-cmd node dist/preDestroy.js"
+    "test:postdeploy": "env-cmd heracudo-postdeploy",
+    "test:predestroy": "env-cmd heracudo-predestroy"
   },
   "bin": {
-    "heracudo-postdeploy": "./dist/postDeploy",
-    "heracudo-predestroy": "./dist/preDestroy"
+    "heracudo-postdeploy": "./bin/postDeploy.js",
+    "heracudo-predestroy": "./bin/preDestroy.js"
   },
   "bugs": {
     "url": "https://github.com/b12k/heracudo/issues"
@@ -177,7 +177,7 @@
     }
   },
   "eslintIgnore": [
-    "dist/**/*"
+    "bin/**/*"
   ],
   "release-it": {
     "npm": {
