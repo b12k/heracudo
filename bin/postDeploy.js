@@ -8,13 +8,8 @@ const github = require('./api/github');
 const required = require('./helpers/required');
 const asyncForEach = require('./helpers/asyncForEach');
 
-
 (async () => {
-  const {
-    env: {
-      DOMAINS = required('DOMAINS'),
-    },
-  } = process;
+  const DOMAINS = process.env.DOMAINS || required('DOMAINS');
 
   const {
     data: {

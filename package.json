@@ -9,13 +9,18 @@
     "Custom Domain",
     "Cloudflare"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/b12k/heracudo.git"
+  },
   "author": "Bogdan Kolesnyk",
   "license": "MIT",
   "scripts": {
-    "prepare": "shx cp -n .env.example .env",
     "test:postdeploy": "env-cmd heracudo-postdeploy",
     "test:predestroy": "env-cmd heracudo-predestroy",
-    "lint": "eslint bin/** --color --format table"
+    "lint": "eslint bin/** --color --format table",
+    "prepare": "shx cp -n .env.example .env",
+    "release": "release-it"
   },
   "bin": {
     "heracudo-postdeploy": "./bin/postDeploy.js",
@@ -56,10 +61,5 @@
   },
   "lint-staged": {
     "*.js": "npm run lint"
-  },
-  "release-it": {
-    "npm": {
-      "publish": false
-    }
   }
 }

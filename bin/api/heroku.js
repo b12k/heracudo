@@ -2,12 +2,8 @@ const axios = require('axios');
 
 const required = require('../helpers/required');
 
-const {
-  env: {
-    HEROKU_TOKEN = required('HEROKU_TOKEN'),
-    HEROKU_APP_NAME = required('HEROKU_APP_NAME'),
-  },
-} = process;
+const HEROKU_TOKEN = process.env.HEROKU_TOKEN || required('HEROKU_TOKEN');
+const HEROKU_APP_NAME = process.env.HEROKU_APP_NAME || required('HEROKU_APP_NAME');
 
 const api = axios.create({
   baseURL: 'https://api.heroku.com/',
