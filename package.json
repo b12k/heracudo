@@ -1,6 +1,6 @@
 {
   "name": "heracudo",
-  "version": "v0.0.0",
+  "version": "1.0.0",
   "description": "Heracudo - Heroku Review Apps Custom Domain",
   "main": "bin/index.js",
   "keywords": [
