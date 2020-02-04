@@ -12,11 +12,10 @@
   "author": "Bogdan Kolesnyk",
   "license": "MIT",
   "scripts": {
-    "build": "babel src --out-dir bin --copy-files",
-    "dev": "babel src --out-dir bin --copy-files -w",
     "prepare": "shx cp -n .env.example .env",
     "test:postdeploy": "env-cmd heracudo-postdeploy",
-    "test:predestroy": "env-cmd heracudo-predestroy"
+    "test:predestroy": "env-cmd heracudo-predestroy",
+    "lint": "eslint bin/** --color --format table"
   },
   "bin": {
     "heracudo-postdeploy": "./bin/postDeploy.js",
@@ -31,154 +30,33 @@
     "parse-domain": "2.3.4"
   },
   "devDependencies": {
-    "@babel/cli": "7.8.3",
-    "@babel/core": "7.8.3",
-    "@babel/node": "7.8.3",
-    "@babel/plugin-proposal-class-properties": "7.8.3",
-    "@babel/plugin-proposal-decorators": "7.8.3",
-    "@babel/plugin-proposal-do-expressions": "7.8.3",
-    "@babel/plugin-proposal-export-default-from": "7.8.3",
-    "@babel/plugin-proposal-export-namespace-from": "7.8.3",
-    "@babel/plugin-proposal-function-bind": "7.8.3",
-    "@babel/plugin-proposal-function-sent": "7.8.3",
-    "@babel/plugin-proposal-json-strings": "7.8.3",
-    "@babel/plugin-proposal-logical-assignment-operators": "7.8.3",
-    "@babel/plugin-proposal-nullish-coalescing-operator": "7.8.3",
-    "@babel/plugin-proposal-numeric-separator": "7.8.3",
-    "@babel/plugin-proposal-optional-chaining": "7.8.3",
-    "@babel/plugin-proposal-pipeline-operator": "7.8.3",
-    "@babel/plugin-proposal-private-methods": "7.8.3",
-    "@babel/plugin-proposal-throw-expressions": "7.8.3",
-    "@babel/plugin-syntax-dynamic-import": "7.8.3",
-    "@babel/plugin-syntax-import-meta": "7.8.3",
-    "@babel/plugin-transform-runtime": "7.8.3",
-    "@babel/preset-env": "7.8.3",
-    "babel-eslint": "10.0.3",
-    "babel-plugin-dynamic-import-node": "2.3.0",
-    "babel-plugin-lodash": "3.3.4",
-    "core-js": "3.6.4",
-    "del-cli": "3.0.0",
     "env-cmd": "10.0.1",
     "eslint": "6.8.0",
     "eslint-config-airbnb-base": "14.0.0",
     "eslint-friendly-formatter": "4.0.1",
-    "eslint-import-resolver-alias": "1.1.2",
-    "eslint-import-resolver-webpack": "0.12.1",
-    "eslint-plugin-babel": "5.3.0",
-    "eslint-plugin-import": "2.20.0",
+    "eslint-plugin-import": "2.20.1",
     "husky": "4.2.1",
-    "npm-run-all": "4.1.5",
+    "lint-staged": "10.0.7",
     "release-it": "12.4.3",
     "shx": "0.3.2"
   },
-  "babel": {
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "targets": {
-            "node": "current"
-          }
-        }
-      ]
-    ],
-    "plugins": [
-      "babel-plugin-lodash",
-      "@babel/plugin-proposal-function-bind",
-      "@babel/plugin-proposal-export-default-from",
-      "@babel/plugin-proposal-logical-assignment-operators",
-      "@babel/plugin-proposal-optional-chaining",
-      [
-        "@babel/plugin-proposal-pipeline-operator",
-        {
-          "proposal": "minimal"
-        }
-      ],
-      "@babel/plugin-proposal-nullish-coalescing-operator",
-      "@babel/plugin-proposal-do-expressions",
-      [
-        "@babel/plugin-proposal-decorators",
-        {
-          "decoratorsBeforeExport": true
-        }
-      ],
-      "@babel/plugin-proposal-function-sent",
-      "@babel/plugin-proposal-export-namespace-from",
-      "@babel/plugin-proposal-numeric-separator",
-      "@babel/plugin-proposal-throw-expressions",
-      "@babel/plugin-syntax-dynamic-import",
-      "@babel/plugin-syntax-import-meta",
-      "@babel/plugin-proposal-class-properties",
-      "@babel/plugin-proposal-json-strings",
-      "babel-plugin-dynamic-import-node"
-    ]
-  },
   "eslintConfig": {
     "root": true,
-    "parser": "babel-eslint",
     "env": {
       "node": true
     },
-    "plugins": [
-      "babel"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint",
-      "sourceType": "module",
-      "allowImportExportEverywhere": false
-    },
     "extends": [
       "airbnb-base"
-    ],
-    "settings": {
-      "import/resolver": {
-        "node": {}
-      }
-    },
-    "rules": {
-      "no-unused-expressions": "off",
-      "babel/no-unused-expressions": "error",
-      "import/extensions": [
-        "error",
-        "always",
-        {
-          "js": "never"
-        }
-      ],
-      "no-param-reassign": [
-        "error",
-        {
-          "props": true,
-          "ignorePropertyModificationsFor": [
-            "context",
-            "config",
-            "global",
-            "state",
-            "acc",
-            "req",
-            "e"
-          ]
-        }
-      ],
-      "import/no-extraneous-dependencies": [
-        "error",
-        {
-          "devDependencies": [
-            "webpack/**/*"
-          ]
-        }
-      ],
-      "import/prefer-default-export": "off",
-      "import/named": "off",
-      "import/export": "off",
-      "no-debugger": "error",
-      "no-console": "error",
-      "no-unused-vars": "error"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
     }
   },
-  "eslintIgnore": [
-    "bin/**/*"
-  ],
+  "lint-staged": {
+    "*.{js}": "lint"
+  },
   "release-it": {
     "npm": {
       "publish": false

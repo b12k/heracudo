@@ -1,30 +1,24 @@
-"use strict";
+const axios = require('axios');
 
-var _axios = _interopRequireDefault(require("axios"));
-
-var _helpers = require("../helpers");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+const required = require('../helpers/required');
 
 const {
   env: {
-    HEROKU_TOKEN = (0, _helpers.required)('HEROKU_TOKEN'),
-    HEROKU_APP_NAME = (0, _helpers.required)('HEROKU_APP_NAME')
-  }
+    HEROKU_TOKEN = required('HEROKU_TOKEN'),
+    HEROKU_APP_NAME = required('HEROKU_APP_NAME'),
+  },
 } = process;
 
-const api = _axios.default.create({
+const api = axios.create({
   baseURL: 'https://api.heroku.com/',
   headers: {
     Authorization: `Bearer ${HEROKU_TOKEN}`,
-    Accept: 'application/vnd.heroku+json; version=3'
-  }
+    Accept: 'application/vnd.heroku+json; version=3',
+  },
 });
 
 module.exports = {
   getDomains: (hostname = '') => api.get(`apps/${HEROKU_APP_NAME}/domains/${hostname}`),
-  createDomain: (hostname = (0, _helpers.required)('hostname')) => api.post(`apps/${HEROKU_APP_NAME}/domains`, {
-    hostname
-  }),
-  deleteDomain: (hostname = (0, _helpers.required)('hostname')) => api.delete(`apps/${HEROKU_APP_NAME}/domains/${hostname}`)
+  createDomain: (hostname = required('hostname')) => api.post(`apps/${HEROKU_APP_NAME}/domains`, { hostname }),
+  deleteDomain: (hostname = required('hostname')) => api.delete(`apps/${HEROKU_APP_NAME}/domains/${hostname}`),
 };

@@ -1,25 +1,36 @@
 #!/usr/bin/env node
-"use strict";
 
-var _api = require("./api");
+const cloudflare = require('./api/cloudflare');
+const heroku = require('./api/heroku');
+const github = require('./api/github');
 
 (async () => {
-  const [{
-    data: domains
-  }, {
-    data: {
-      result: dnsRecords
-    }
-  }] = await Promise.all([_api.heroku.getDomains(), _api.cloudflare.getDnsRecords()]);
-  const promises = domains.reduce((acc, {
-    cname,
-    hostname
-  }) => {
-    const dnsRecord = dnsRecords.find(({
-      content
-    }) => content === cname);
+  const [
+    {
+      data: domains,
+    },
+    {
+      data: {
+        result: dnsRecords,
+      },
+    },
+  ] = await Promise.all([
+    heroku.getDomains(),
+    cloudflare.getDnsRecords(),
+  ]);
+
+  const promises = domains.reduce((acc, { cname, hostname }) => {
+    const dnsRecord = dnsRecords.find(({ content }) => content === cname);
     if (!dnsRecord) return acc;
-    return [...acc, _api.cloudflare.deleteDnsRecord(dnsRecord.id), _api.heroku.deleteDomain(hostname)];
+    return [
+      ...acc,
+      cloudflare.deleteDnsRecord(dnsRecord.id),
+      heroku.deleteDomain(hostname),
+    ];
   }, []);
-  await Promise.all([...promises, _api.github.deletePrLink()]);
+
+  await Promise.all([
+    ...promises,
+    github.deletePrLink(),
+  ]);
 })();

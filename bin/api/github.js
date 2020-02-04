@@ -1,51 +1,48 @@
-"use strict";
+const axios = require('axios');
 
-var _axios = _interopRequireDefault(require("axios"));
-
-var _helpers = require("../helpers");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+const required = require('../helpers/required');
+const base64Decode = require('../helpers/base64Decode');
 
 const {
   env: {
-    GITHUB_REPOSITORY = (0, _helpers.required)('GITHUB_REPOSITORY'),
-    GITHUB_TOKEN = (0, _helpers.required)('GITHUB_TOKEN'),
-    HEROKU_PR_NUMBER = (0, _helpers.required)('HEROKU_PR_NUMBER'),
-    GITHUB_PR_LINK_MARKER = '### Preview:'
-  }
+    GITHUB_REPOSITORY = required('GITHUB_REPOSITORY'),
+    GITHUB_TOKEN = required('GITHUB_TOKEN'),
+    HEROKU_PR_NUMBER = required('HEROKU_PR_NUMBER'),
+    GITHUB_PR_LINK_MARKER = '## Review App:',
+  },
 } = process;
 
-const api = _axios.default.create({
+const api = axios.create({
   baseURL: 'https://api.github.com/',
   headers: {
-    Authorization: `token ${(0, _helpers.base64Decode)(GITHUB_TOKEN)}`,
-    Accept: 'application/vnd.github.v3+json'
-  }
+    Authorization: `token ${base64Decode(GITHUB_TOKEN)}`,
+    Accept: 'application/vnd.github.v3+json',
+  },
 });
 
 const prUrl = `repos/${GITHUB_REPOSITORY}/pulls/${HEROKU_PR_NUMBER}`;
 const splitter = '\r\n';
-
-const getPrBody = () => api.get(prUrl).then(({
-  data: {
-    body
-  }
-}) => body);
-
-const setPrBody = body => api.patch(prUrl, {
-  body
-});
-
-const createPrLink = async (hostname = (0, _helpers.required)('hostname')) => setPrBody([`${GITHUB_PR_LINK_MARKER} [${hostname}](${hostname})`, await getPrBody()].join(splitter));
-
+const getPrBody = () => api.get(prUrl).then(({ data: { body } }) => body);
+const setPrBody = (body) => api.patch(prUrl, { body });
+const createPrLink = async (hostname = required('hostname')) => {
+  const prBody = await getPrBody();
+  const newPrBody = [
+    `${GITHUB_PR_LINK_MARKER} [${hostname}](${hostname})`,
+    prBody,
+  ].join(splitter);
+  return setPrBody(newPrBody);
+};
 const deletePrLink = async () => {
   const prBody = await getPrBody();
   const lineRegExp = new RegExp(`^${GITHUB_PR_LINK_MARKER}`);
-  const newPrBody = prBody.split(splitter).filter(line => !line.match(lineRegExp)).join(splitter);
+  const newPrBody = prBody
+    .split(splitter)
+    .filter((line) => !line.match(lineRegExp))
+    .join(splitter);
   return setPrBody(newPrBody);
 };
 
 module.exports = {
   createPrLink,
-  deletePrLink
+  deletePrLink,
 };
