@@ -1,7 +1,6 @@
 const axios = require('axios');
 
 const required = require('../helpers/required');
-const base64Decode = require('../helpers/base64Decode');
 
 const GITHUB_REPOSITORY = process.env.GITHUB_REPOSITORY || required('GITHUB_REPOSITORY');
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN || required('GITHUB_TOKEN');
@@ -14,7 +13,7 @@ const splitter = '\r\n';
 const api = axios.create({
   baseURL: 'https://api.github.com/',
   headers: {
-    Authorization: `token ${base64Decode(GITHUB_TOKEN)}`,
+    Authorization: `token ${GITHUB_TOKEN}`,
     Accept: 'application/vnd.github.v3+json',
   },
 });

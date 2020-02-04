@@ -20,7 +20,7 @@
     "test:predestroy": "env-cmd heracudo-predestroy",
     "lint": "eslint bin/** --color --format table",
     "prepare": "shx cp -n .env.example .env",
-    "release": "release-it"
+    "release": "env-cmd release-it"
   },
   "bin": {
     "heracudo-postdeploy": "./bin/postDeploy.js",
