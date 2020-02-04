@@ -42,8 +42,6 @@ const deletePrLink = async () => {
   return setPrBody(newPrBody);
 };
 
-console.log('Foo Bar');
-
 module.exports = {
   createPrLink,
   deletePrLink,
