@@ -25,7 +25,7 @@ Heroku Review Apps + Cloudflare + Github Pull Requests
         }
       }
     ```
-3. Add environment variables for Heroku review applications pipeline settings:
+3. Add environment variables for Heroku review applications. Either in pipeline settings, or `app.json`:
 
     Required:
     * `HRCD_DOMAINS` Comma separated list of domains which are used as a base for review application domain variations.
