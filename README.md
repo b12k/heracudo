@@ -5,7 +5,7 @@ Special heroku review application hooks which make usage of fancy custom review 
 
 Heroku Review Apps + Cloudflare + Github Pull Requests
 
-### Instalation
+### Installation
 1. `npm i heracudo --save` Must be installed in `dependencies`, not `devDependencies`, in order not to be pruned after Heroku installation process.
 2. Edit your `app.json`:
     ```json
@@ -16,12 +16,12 @@ Heroku Review Apps + Cloudflare + Github Pull Requests
         }
       }
     ```
-    2.1 Optionally edit your `package.json`
+    2.1 **Optionally** edit your `package.json`. Used to mark links as pending or ready when Heroku review application is rebuilding after Github pull request receives new commits.
     ```json
       {
         "scripts": {
-          "preinstall": "hrcd-prebuild",
-          "postbuild": "hrcd-postbuild"
+          "preinstall": "hrcd-markpending",
+          "postinstall": "hrcd-markready"
         }
       }
     ```
@@ -40,5 +40,5 @@ Heroku Review Apps + Cloudflare + Github Pull Requests
 
     Optional:
     * `HRCD_GITHUB_LINK_MARKER`   A string which will be added before of review app link in Github pull request description. Defaults to `## Preview: `
-    * `HRCD_GITHUB_LINK_UPDATING` A string which will be added after of review app link in Github pull request description when application is building. Defaults to `⏳`
+    * `HRCD_GITHUB_LINK_PENDING` A string which will be added after of review app link in Github pull request description when application is building. Defaults to `⏳`
     * `HRCD_GITHUB_LINK_READY`    A string which is added in front of review app link in Github pull request description when application is ready. Defaults to `🚀`

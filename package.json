@@ -2,7 +2,7 @@
   "name": "heracudo",
   "version": "1.0.0",
   "description": "Heracudo - Heroku Review Apps Custom Domain",
-  "main": "bin/index.js",
+  "main": "lib/index.js",
   "keywords": [
     "Heroku",
     "Review Apps",
@@ -16,15 +16,19 @@
   "author": "Bogdan Kolesnyk",
   "license": "MIT",
   "scripts": {
-    "test:postdeploy": "env-cmd heracudo-postdeploy",
-    "test:predestroy": "env-cmd heracudo-predestroy",
-    "lint": "eslint bin/** --color --format table",
+    "test:postdeploy": "env-cmd hrcd-postdeploy",
+    "test:markpending": "env-cmd hrcd-markpending",
+    "test:markready": "env-cmd hrcd-markready",
+    "test:predestroy": "env-cmd hrcd-predestroy",
+    "lint": "eslint lib/** --color --format table",
     "prepare": "shx cp -n .env.example .env",
     "release": "env-cmd release-it"
   },
   "bin": {
-    "heracudo-postdeploy": "./bin/postDeploy.js",
-    "heracudo-predestroy": "./bin/preDestroy.js"
+    "hrcd-postdeploy": "bin/postDeploy.js",
+    "hrcd-predestroy": "bin/preDestroy.js",
+    "hrcd-markpending": "bin/markPending.js",
+    "hrcd-markready": "bin/markReady.js"
   },
   "bugs": {
     "url": "https://github.com/b12k/heracudo/issues"
