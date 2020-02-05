@@ -42,4 +42,3 @@ Heroku Review Apps + Cloudflare + Github Pull Requests
     * `HRCD_GITHUB_LINK_MARKER`   A string which will be added before of review app link in Github pull request description. Defaults to `## Preview: `
     * `HRCD_GITHUB_LINK_UPDATING` A string which will be added after of review app link in Github pull request description when application is building. Defaults to `⏳`
     * `HRCD_GITHUB_LINK_READY`    A string which is added in front of review app link in Github pull request description when application is ready. Defaults to `🚀`
-⏳
