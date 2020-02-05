@@ -19,7 +19,7 @@ const asyncForEach = require('./helpers/asyncForEach');
 
   await asyncForEach(DOMAINS.split(','), async (DOMAIN) => {
     const {
-      subdomain = '',
+      subdomain,
       domain,
       tld,
     } = parseDomain(DOMAIN.trim());
