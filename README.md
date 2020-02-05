@@ -16,7 +16,7 @@ Heroku Review Apps + Cloudflare + Github Pull Requests
         }
       }
     ```
-    2.1 **Optionally** edit your `package.json`. Used to mark links as pending or ready when Heroku review application is rebuilding after Github pull request receives new commits.
+    2.1 **Optionally** edit your `package.json`. Used to mark links as _pending_ or _ready_ when Heroku review application is rebuilding after Github pull request receives new commits.
     ```json
       {
         "scripts": {
