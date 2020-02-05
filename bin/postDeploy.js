@@ -1,5 +1,2 @@
-const heracudo = require('../lib');
-
-(async () => {
-  await heracudo.postDeploy();
-})();
+#!/usr/bin/env node
+require('../lib').postDeploy();

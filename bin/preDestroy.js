@@ -1,5 +1,2 @@
-const heracudo = require('../lib');
-
-(async () => {
-  await heracudo.preDestroy();
-})();
+#!/usr/bin/env node
+require('../lib').preDestroy();
