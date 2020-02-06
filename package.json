@@ -16,10 +16,10 @@
   "author": "Bogdan Kolesnyk",
   "license": "MIT",
   "scripts": {
-    "test:postdeploy": "env-cmd hrcd-postdeploy",
-    "test:markpending": "env-cmd hrcd-markpending",
-    "test:markready": "env-cmd hrcd-markready",
-    "test:predestroy": "env-cmd hrcd-predestroy",
+    "test:postdeploy": "env-cmd node bin/postDeploy.js",
+    "test:markpending": "env-cmd node bin/markPending.js",
+    "test:markready": "env-cmd node bin/markReady.js",
+    "test:predestroy": "env-cmd node bin/preDestroy.js",
     "lint": "eslint lib/** --color --format table",
     "prepare": "shx cp -n .env.example .env",
     "release": "env-cmd release-it"
@@ -56,7 +56,10 @@
     },
     "extends": [
       "airbnb-base"
-    ]
+    ],
+    "rules": {
+      "global-require": "off"
+    }
   },
   "husky": {
     "hooks": {
