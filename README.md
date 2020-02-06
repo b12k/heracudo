@@ -42,3 +42,9 @@ Heroku Review Apps + Cloudflare + Github Pull Requests
     * `HRCD_GITHUB_LINK_MARKER`   A string which will be added before of review app link in Github pull request description. Defaults to `## Preview: `
     * `HRCD_GITHUB_LINK_PENDING` A string which will be added after of review app link in Github pull request description when application is building. Defaults to `⏳`
     * `HRCD_GITHUB_LINK_READY`    A string which is added in front of review app link in Github pull request description when application is ready. Defaults to `🚀`
+    
+### Hooks
+* `hrcd-postdeploy` Triggered only once when review application is created. Adds domain to Heroku review application, creates respective CNAME in Cloudflare, adds newly created Review application link on top of Github pull request description.
+* `hrcd-markpending` (Optional) Triggered every time (whenever defined in npm scripts) to mark Heroku review application link in Github pull request description as "pending"
+* `hrcd-markready` (Optional) Triggered every time (whenever defined in npm scripts) to mark Heroku review application link in Github pull request description as "ready"
+* `hrcd-predestroy` Triggered only once when review application is going to be destroyed. Removes domains from Heroku review application, deletes CNAMEs in Cloudflare, removes Review application link on top of Github pull request description.
