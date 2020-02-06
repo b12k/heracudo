@@ -16,12 +16,12 @@ Heroku Review Apps + Cloudflare + Github Pull Requests
         }
       }
     ```
-    2.1 **Optionally** edit your `package.json`. Used to mark links as _pending_ or _ready_ when Heroku review application is rebuilding after Github pull request receives new commits.
+    2.1 **Optionally** edit your `package.json`. Used to mark links as _pending_ or _ready_ when Heroku review application is rebuilding after Github pull request receives new commits. Add this hooks in scripts which works best for you, when application started rebuilding, and before starting the application.
     ```json
       {
         "scripts": {
-          "preinstall": "hrcd-markpending",
-          "postinstall": "hrcd-markready"
+          "postinstall": "hrcd-markpending",
+          "postbuild": "hrcd-markready"
         }
       }
     ```
