@@ -36,7 +36,6 @@ Heroku Review Apps + Cloudflare + Github Pull Requests
     * `HRCD_CLOUDFLARE_TOKEN_B64` Base64 encoded Cloudflare API access token.
     * `HRCD_GITHUB_TOKEN_B64`     Base64 encoded Github API access token.
     * `HRCD_GITHUB_REPOSITORY`    Github repository name in format `username/repository_name`.
-    * `HRCD_GITHUB_LINK_MARKER`   A string which is added in front of review app url in Github pull request description.
 
     Optional:
     * `HRCD_GITHUB_LINK_MARKER`   A string which will be added before of review app link in Github pull request description. Defaults to `## Preview: `
