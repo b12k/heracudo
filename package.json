@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/b12k/heracudo#readme",
   "dependencies": {
-    "axios": "0.19.2",
+    "axios": "0.21.1",
     "parse-domain": "2.3.4"
   },
   "devDependencies": {
