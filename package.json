@@ -46,7 +46,7 @@
     "eslint-plugin-import": "2.20.1",
     "husky": "4.2.1",
     "lint-staged": "10.0.7",
-    "release-it": "12.4.3",
+    "release-it": "15.6.0",
     "shx": "0.3.2"
   },
   "eslintConfig": {
